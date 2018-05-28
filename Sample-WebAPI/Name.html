@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <title>Name List</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var nameLs = $('#nameList');
+            $('#btnLoad').click(function () {
+                $('#isLoading').show();
+                $.ajax({
+                    type: 'GET',
+                    url: 'api/test',
+                    dataType: 'json',
+                    success: function (data) {
+                        nameLs.empty();
+                        $('#isLoading').hide();
+                        $.each(data, function (index, value) {
+                            nameLs.append('<li>' + value + '</li>');
+                        });                       
+                    },
+                });
+            });
+            $('#btnClear').click(function () {
+                name.empty();
+            });
+        });
+    </script>
+</head>
+<body>
+    <label id="isLoading" hidden="hidden">Loading...</label>
+    <input type="button" id="btnLoad" value="Load Name"/> 
+    <input type="button" id="btnClear" value="Clear" /> 
+    <ul id="nameList">
+
+    </ul>
+</body>
+</html>
